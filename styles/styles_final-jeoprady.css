@@ -1,0 +1,93 @@
+h1 {
+    font-size: 5vw;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 1vw;
+    }
+
+.player-turn{
+    font-size: 3vw;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 1vw;
+    }
+
+
+
+.final-parent{
+    display: flex;
+    flex-direction: column;
+    margin-right: 32vw ;
+    margin-left:  30vw;
+    margin-top: 2vw;
+    }
+
+.final-category{
+    background-color: gray;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 26px;
+    padding-top: .5vw;
+    padding-bottom: .5vw;
+    }
+
+
+.final-question{
+    display:flex;
+    justify-content: center;
+    border: 1px solid black;
+    margin-top: 2vw;
+    height: 10vw;
+    text-align: center;
+    padding-top: 7vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    }
+
+
+.input-parent{
+    display: flex;
+    flex-direction: column;
+    margin-right: 42vw ;
+    margin-left:  40vw;
+    margin-top: 1vw;}
+    
+.user-input{
+    margin-top: 1vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    padding: .5vw;
+    }
+
+
+
+.bet-div{
+    display: flex;
+    justify-content: center;
+    } 
+
+.bet-button{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        padding-left: 2vw;
+        padding-right: 2vw;
+        background-color: gray;
+        border: 1px solid black;
+        margin-top: 1vw;
+        margin-right: 1.5vw;
+        } 
+
+
+footer{
+    background-color: gray;
+    border: 1px solid black;
+    text-align: center;
+    margin-top: 5vw;
+    margin-right: 15vw ;
+    margin-left:  15vw;
+    font-size: 2em;
+    padding: .5vw;}
+
+        
+
+

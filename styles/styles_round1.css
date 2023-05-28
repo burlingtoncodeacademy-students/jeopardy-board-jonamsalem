@@ -14,15 +14,75 @@ h1 {
 
 
 table{
-    border-collapse: collapse;
-    margin: 0%;
+    border-collapse: separate;
+
     min-width: 100%
     }
 
 td, tr {
 text-align: center;
 padding:10px 3px;
-border: 2px solid black;}
+border: 2px solid black;
+margin: 1vw;}
 
 .table thead {background-color: gray;}
+
+
+.parent-container-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding-top: 2vw;
+    }
+
+
+.user-input{
+    padding: 1vw;
+font-size: 15px;
+border: 2px solid black;
+}
+
+.button-container{
+    display: flex;
+    gap: 1.9vw;
+    }
+
+.button{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    width: 7vw;
+    padding-top: .5vw;
+    padding-bottom: .5vw;
+    text-align: center;
+    margin: .5vw;
+    border: 1px solid black
+    }
+
+.parent-container-score{
+    display: flex;
+    justify-content: space-between;
+    padding: 5vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+}
+
+.next-round{
+margin-left: 80%;
+font-size: 20px;
+text-align: center;
+width: 130px;
+padding:15px;
+border: 2px solid black;}
+
+
+footer{
+    background-color: gray;
+    border: .1em solid black;
+    height: 1em;
+    text-align: center;
+    margin-top: 2vw;
+    margin-right: 15vw ;
+    margin-left:  15vw;
+    font-size: 2em;}
 

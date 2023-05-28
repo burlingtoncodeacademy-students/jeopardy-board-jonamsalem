@@ -2,17 +2,18 @@ h1 {
     font-size: 4vw;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-}
+    }
 
 
-img {display: block;
+img {
+    display: block;
     width: 75vw;
     height: 35vw;
     margin-left: auto;
     margin-right: auto;
     object-fit:cover;
     border: 2px solid black;
-}
+    }
 
 
 .play-button{
@@ -26,13 +27,15 @@ img {display: block;
     border: 1px solid black;
     }   
 
-footer{
-    display: block;
-    margin-top: 15vw;
-    text-align: center;
+
+footer {
     background-color: gray;
-    width: 45vw;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 3vw;
-    border: 1px solid black;1}
+    border: 1px solid black;
+    text-align: center;
+    margin-top: 5vw;
+    margin-right: 15vw ;
+    margin-left:  15vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2em;
+    padding: .5vw;
+}

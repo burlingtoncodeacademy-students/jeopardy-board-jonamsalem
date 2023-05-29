@@ -1,9 +1,12 @@
+
 h1 {
     font-size: 5vw;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 1vw;
 }
+
+
 
 .player-turn{
     font-size: 3vw;
@@ -37,6 +40,7 @@ margin: 1vw;}
 
 
 .user-input{
+    background-color: #DCDCDC;
     margin-top: 1.5vw;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2vw;

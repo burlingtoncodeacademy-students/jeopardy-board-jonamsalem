@@ -1,9 +1,19 @@
+
 h1 {
     font-size: 4vw;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    }
+    transition: transform 1s;
+}
 
+.rolling-text{    
+    font-size: 5vw;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 1vw;
+}
+
+h1:hover{
+animation: all-around 1s forwards;}
 
 img {
     display: block;
@@ -13,33 +23,37 @@ img {
     margin-right: auto;
     object-fit:cover;
     border: 2px solid black;
-    }
+}
 
 
-.play-button{
+.play-button {
     display: block;
     margin-top: 5vw;
     margin-left: auto;
     margin-right: auto;
     font-size: 3vw;
     width: 20vw;
+    border: 1px solid black;
+}   
+
+
+footer {
     background-color: gray;
     border: 1px solid black;
-    }   
+    text-align: center;
+    margin-top: 15vw;
+    margin-right: 18vw ;
+    margin-left:  18vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3vw;
+    padding: .5vw;
+}
 
+@keyframes all-around{
+    100%{transform: scale(1.5);
 
-    footer {
-        background-color: gray;
-        border: 1px solid black;
-        text-align: center;
-        margin-top: 15vw;
-        margin-right: 18vw ;
-        margin-left:  18vw;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 3vw;
-        padding: .5vw;}
-    
-    
+    }
+}
 
 /* @media (min-width: 414px) {body{word-wrap:normal}} */
 /* word wrap not necessary for responsive page because relative units were used */

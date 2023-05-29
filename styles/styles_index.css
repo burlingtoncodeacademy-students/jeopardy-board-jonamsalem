@@ -1,4 +1,8 @@
-
+* {
+    margin: 0;
+    padding: 0;
+}
+    
 h1 {
     font-size: 4vw;
     text-align: center;
@@ -13,7 +17,8 @@ h1 {
 }
 
 h1:hover{
-animation: all-around 1s forwards;}
+    animation: all-around 1s forwards;
+}
 
 img {
     display: block;
@@ -51,7 +56,6 @@ footer {
 
 @keyframes all-around{
     100%{transform: scale(1.5);
-
     }
 }
 

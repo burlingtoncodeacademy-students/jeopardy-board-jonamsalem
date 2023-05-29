@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+    
 h1 {
     font-size: 5vw;
     text-align: center;
@@ -5,77 +10,81 @@ h1 {
     margin-bottom: 1vw;
 }
 
-.player-turn{
+.player-turn {
     font-size: 3vw;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 1vw;
-    }
+}
 
 
-table{
+table {
     border-collapse: separate;
     min-width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5vw;
-    }
+}
 
 td, tr {
 text-align: center;
 padding:1vw;
 border: 2px solid black;
-margin: 1vw;}
+margin: 1vw;
+}
 
-.table thead {background-color: gray;}
+.table thead {
+    background-color: gray;
+}
 
 
-.parent-container-form{
+.parent-container-form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    }
+}
 
 
-.user-input{
+.user-input {
     margin-top: 1.5vw;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2vw;
     padding: .5vw;;
 }
 
-.button-container{
+.button-container {
     display: flex;
     gap: 2.3vw;
     margin-top: .5vw;
-    }
+}
 
 
-    .button{
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 2.1vw;
-        width: 9.5vw;
-        padding-top: .5vw;
-        padding-bottom: .5vw;
-        text-align: center;
-        margin: .5vw;
-        border: .2vw solid black
-        }
+.button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.1vw;
+    width: 9.5vw;
+    padding-top: .5vw;
+    padding-bottom: .5vw;
+    text-align: center;
+    margin: .5vw;
+    border: .2vw solid black
+}
 
-.parent-container-score{
+.parent-container-score {
     display: flex;
     justify-content: space-between;
     padding: 5vw;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 3vw;
-    }
-    .next-round{
-        margin-left: 75%;
-        margin-top: 10%;
-        font-size: 3vw;
-        text-align: center;
-        width: 16vw;
-        padding:1vw;
-        border: 1px solid black;}
+}
+.next-round {
+    margin-left: 75%;
+    margin-top: 10%;
+    font-size: 3vw;
+    text-align: center;
+    width: 16vw;
+    padding:1vw;
+    border: 1px solid black;
+}
 
 
 footer {

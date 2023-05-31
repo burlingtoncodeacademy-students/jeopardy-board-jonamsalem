@@ -10,13 +10,13 @@ h1 {
     transition: transform 1s;
 }
 
-.rolling-text{    
+.rolling-text {    
     font-size: 5vw;
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 1vw;
 }
 
-h1:hover{
+h1:hover {
     animation: all-around 1s forwards;
 }
 
@@ -32,10 +32,9 @@ img {
 
 
 .play-button {
-    display: block;
-    margin-top: 5vw;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    margin: 2vw auto;
     font-size: 3vw;
     width: 20vw;
     border: 1px solid black;
@@ -54,7 +53,7 @@ footer {
     padding: .5vw;
 }
 
-@keyframes all-around{
+@keyframes all-around {
     100%{transform: scale(1.5);
     }
 }

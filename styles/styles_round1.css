@@ -99,11 +99,11 @@ footer {
     padding: .5vw;
 }
 
-
-.questionButton{
+.nature, .animals, .comp, .mythology, .history, .mythology, .general {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2.1vw;
     width: 16.2vw;
     text-align: center;
 }
+
 

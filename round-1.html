@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,7 +35,7 @@
       <tr class="row1">
         <td><button class ="nature">100</button></td>
         <td><button class ="animals">100</button></td>
-        <td><button class ="comp">100</button></td>
+        <td><button class ="computers">100</button></td>
         <td><button class ="mythology">100</button></td>
         <td><button class ="history">100</button></td>
         <td><button class ="general">100</button></td>
@@ -43,7 +44,7 @@
       <tr class="row2">
         <td><button class ="nature">200</button></td>
         <td><button class ="animals">200</button></td>
-        <td><button class ="comp">200</button></td>
+        <td><button class ="computers">200</button></td>
         <td><button class ="mythology">200</button></td>
         <td><button class ="history">200</button></td>
         <td><button class ="general">200</button></td>
@@ -52,7 +53,7 @@
       <tr class="row3">
         <td><button class ="nature">300</button></td>
         <td><button class ="animals">300</button></td>
-        <td><button class ="comp">300</button></td>
+        <td><button class ="computers">300</button></td>
         <td><button class ="mythology">300</button></td>
         <td><button class ="history">300</button></td>
         <td><button class ="general">300</button></td>
@@ -63,16 +64,16 @@
       <tr class="row4">
         <td><button class ="nature">400</button></td>
         <td><button class ="animals">400</button></td>
-        <td><button class ="comp">400</button></td>
+        <td><button class ="computers">400</button></td>
         <td><button class ="mythology">400</button></td>
         <td><button class ="history">400</button></td>
         <td><button class ="general">400</button></td>
       </tr>
 
       <tr class="row5">
-        <td><button class ="nature">500</button></td>
+        <td><button class ="nature" >500</button></td>
         <td><button class ="animals">500</button></td>
-        <td><button class ="comp">500</button></td>
+        <td><button class ="computers">500</button></td>
         <td><button class ="mythology">500</button></td>
         <td><button class ="history">500</button></td>
         <td><button class ="general">500</button></td>
@@ -83,17 +84,17 @@
       <!-- table consisting of all the rows and columns for round 1 -->
 
 
-  <div class="parent-container-form">
+  <form class="parent-container-form">
     <!-- container for form and both buttons -->
 
       <input class= "user-input" placeholder="User input..."> </input>
 
       <div class="button-container"> 
 
-            <button class = "button">GUESS</button> 
-            <button class = "button">PASS</button> 
+            <button id = "guess">GUESS</button> 
+            <button id = "pass">PASS</button> 
         </div>
-   </div>
+      </form>
 
 
   
@@ -110,6 +111,6 @@
 
   <footer>FOOTER SITE INFORMATION</footer>
 
-  <script src="round-1.js"></script>
+  <script src="round-1.js" type="module" ></script>
   </body>
 </html>

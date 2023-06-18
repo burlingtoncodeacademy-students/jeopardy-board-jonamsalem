@@ -19,21 +19,30 @@ let generalQuestions = placeholderQuestions.slice(50,60)
 
 let buttons = document.querySelectorAll("button")
  let clickedButton
-
-
+ let playerOneScore1 = 0
+ let playerTwoScore2 = 0 
 let guess = document.querySelector("#guess")
 let pass = document.querySelector("#pass")
 let userInput = document.querySelector(".user-input")
-guess.disabled = true
-pass.disabled = true
+let playerOneScore = document.getElementById("playerOneScore")
+let playerTwoScore = document.getElementById("playerTwoScore")
+let currentPlayer = playerOneScore
+let playerNum = 1
+let switchVariable = 1
 
 let playerTurn = document.querySelector(".player-turn")
 playerTurn.textContent = "Player 1 Turn"
+guess.disabled = true
+guess.style.color = "gray"
+pass.disabled = true
+pass.style.color = "gray"
 
-
-  function buttonClicked(){
+function buttonClicked(){
+    
     buttons.forEach(button => {
         button.addEventListener("click", () => {
+            button.style.backgroundColor = "black"
+            button.disabled = true
             clickedButton = Array.from(buttons).filter(btn => btn == button)
             chooseQuestion(clickedButton)
 
@@ -80,18 +89,43 @@ let question
      } 
      guess.disabled = false
      pass.disabled = false
-     checkAnswer(qObject)
+     checkAnswer(qObject, playerOneScore)
     }
 
- function checkAnswer(question){
+ function checkAnswer(question, user){
+
     guess.addEventListener("click", event =>{
     event.preventDefault()
+    console.log(question.answer)
     if (userInput.value == question.answer){
-    console.log("yes")}
-    else{
-        console.log("no")
+     
+        if (switchVariable == 1){
+        playerOneScore1 += Number(clickedButton[0].textContent)
+        currentPlayer.textContent = `Player ${playerNum} Score : ${playerOneScore1}`}
+
+        else if (switchVariable == -1){
+            playerTwoScore2 += Number(clickedButton[0].textContent)
+            currentPlayer.textContent = `Player ${playerNum} Score : ${playerTwoScore2}`
+        }
     }
+    else{
+        alert("Wrong. Other player's turn")
+        switchVariable = switchVariable * -1
+        console.log(switchVariable)
+        if (switchVariable == -1){
+        playerNum = 2
+        currentPlayer = playerTwoScore}
+        else if(switchVariable == 1) {
+            playerNum = 1
+            currentPlayer = playerOneScore
+
     
-})}
+    }
+}
+    question = null 
+
+ })
+ }
+
 
 buttonClicked()

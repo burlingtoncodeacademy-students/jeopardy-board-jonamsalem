@@ -33,12 +33,9 @@ let switchVariable = 1
 let playerTurn = document.querySelector(".player-turn")
 playerTurn.textContent = "Player 1 Turn"
 guess.disabled = true
-guess.style.color = "gray"
 pass.disabled = true
-pass.style.color = "gray"
 
 function buttonClicked(){
-    
     buttons.forEach(button => {
         button.addEventListener("click", () => {
             button.style.backgroundColor = "black"
@@ -47,14 +44,13 @@ function buttonClicked(){
             chooseQuestion(clickedButton)
 
         
-    
+        
         })})
     }
 
 let qObject
 let question
  function chooseQuestion(button){
-
     switch (clickedButton[0].className){
         case "nature":
              qObject = (natureQuestions[Math.floor(Math.random() * 10)])
@@ -92,40 +88,59 @@ let question
      checkAnswer(qObject, playerOneScore)
     }
 
- function checkAnswer(question, user){
+function checkAnswer(question){  
+        pass.addEventListener("click", event => {
+            event.preventDefault()
+            alert(`Other player's turn... ${question.question}`)
+        })
+        guess.addEventListener("click", event =>{
+        event.preventDefault()
+        console.log(question.answer)
+        if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
+            alert("Nice, you get another question")
 
-    guess.addEventListener("click", event =>{
-    event.preventDefault()
-    console.log(question.answer)
-    if (userInput.value == question.answer){
-     
-        if (switchVariable == 1){
-        playerOneScore1 += Number(clickedButton[0].textContent)
-        currentPlayer.textContent = `Player ${playerNum} Score : ${playerOneScore1}`}
+            if (switchVariable == 1){
+            playerOneScore1 += Number(clickedButton[0].textContent)
+            currentPlayer.textContent = `Player ${playerNum} Score : ${playerOneScore1}`
+            userInput.value = ""}
 
-        else if (switchVariable == -1){
-            playerTwoScore2 += Number(clickedButton[0].textContent)
-            currentPlayer.textContent = `Player ${playerNum} Score : ${playerTwoScore2}`
+            else if (switchVariable == -1){
+                userInput.value = ""
+                playerTwoScore2 += Number(clickedButton[0].textContent)
+                currentPlayer.textContent = `Player ${playerNum} Score : ${playerTwoScore2}`
+            }
+
+            if (playerOneScore1 >= 1500 || playerTwoScore2 >= 1500){
+                document.location.href = "round-2.html"
+             }
+        }
+        else{
+            alert(`Wrong. Other Player's turn. ${question.question}`)
+            userInput.value = ""
+            checkAnswer(question)
+            switchVariable = switchVariable * -1
+            console.log(switchVariable)
+            if (switchVariable == -1){
+                playerTurn.textContent = "Player 2 Turn"
+                playerNum = 2
+                currentPlayer = playerTwoScore
+             }
+            else if(switchVariable == 1) {
+                playerTurn.textContent = "Player 1 Turn"
+                playerNum = 1
+                currentPlayer = playerOneScore
+
+        
         }
     }
-    else{
-        alert("Wrong. Other player's turn")
-        switchVariable = switchVariable * -1
-        console.log(switchVariable)
-        if (switchVariable == -1){
-        playerNum = 2
-        currentPlayer = playerTwoScore}
-        else if(switchVariable == 1) {
-            playerNum = 1
-            currentPlayer = playerOneScore
 
-    
-    }
-}
-    question = null 
+        question = null 
+
 
  })
- }
+
+}
+ 
 
 
 buttonClicked()

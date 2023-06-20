@@ -55,31 +55,42 @@ function buttonClicked(){
              qObject = (natureQuestions[Math.floor(Math.random() * 10)])
              question = qObject.question
              alert(question)
+             natureQuestions = natureQuestions.filter(questions => questions != qObject)
+
              break; 
          case "animals":
              qObject = (animalQuestions[Math.floor(Math.random() * 10)])
              question = qObject.question
              alert(question)
+             animalQuestions = animalQuestions.filter(questions => questions != qObject)
+
              break;
          case "computers":
              qObject = (computerQuestions[Math.floor(Math.random() * 10)])
              question = qObject.question
              alert(question)
+             computerQuestions = computerQuestions.filter(questions => questions != qObject)
+
              break;
          case "mythology":
              qObject = (mythologyQuestions[Math.floor(Math.random() * 10)])
              question = qObject.question
              alert(question)
+             mythologyQuestions = mythologyQuestions.filter(questions => questions != qObject)
+
              break;
          case "history":
              qObject = (historyQuestions[Math.floor(Math.random() * 10)])
              question = qObject.question
              alert(question)
+             historyQuestions = historyQuestions.filter(questions => questions != qObject)
+
              break;
          case "general":
              qObject = (generalQuestions[Math.floor(Math.random() * 10)])
              question = qObject.question
              alert(question)
+             generalQuestions = generalQuestions.filter(questions => questions != qObject)
              break;
      } 
  
@@ -87,7 +98,7 @@ function buttonClicked(){
     }
 
 function checkAnswer(question){
-    let trys = 0
+    console.log("start checking answer")
     switch(switchVariable){
         case -1:
             playerTurn.textContent = "Player 2 Turn"
@@ -105,11 +116,14 @@ function checkAnswer(question){
         event.preventDefault()
         switchVariable = switchVariable * -1
         alert(`Other player's turn... ${question.question}`)
+        checkAnswer(question)
+        
     })
     guess.addEventListener("click", event =>{
+        event.preventDefault()
+        console.log("guess clicked")
         buttons.forEach(btn => {
             btn.disabled = false;})
-        event.preventDefault()
         console.log(question.answer)
         if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
             alert("Nice, you get another question")
@@ -134,20 +148,27 @@ function checkAnswer(question){
         }
         else{
             alert(`Wrong. Other Player's turn. ${question.question}`)
+            if (switchVariable ==1){
+                playerOneScore1 -= Number(clickedButton[0].textContent)
+                currentPlayer.textContent = `Player ${playerNum} Score : ${playerOneScore1}`
+            }
+            else if (switchVariable == -1){
+                playerTwoScore2 -= Number(clickedButton[0].textContent)
+                currentPlayer.textContent = `Player ${playerNum} Score : ${playerTwoScore2}`
+            }
+
             userInput.value = ""
             switchVariable = switchVariable * -1
+            buttons.forEach(btn => {
+                btn.disabled = true;})
             checkAnswer(question)
 
             }
-            question = null 
+             
         })
 
 
 }
-
-
-
-
 
 buttonClicked()
 

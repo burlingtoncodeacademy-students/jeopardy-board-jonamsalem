@@ -66,7 +66,8 @@ border: 2px solid black;
     padding-bottom: .5vw;
     text-align: center;
     margin: .5vw;
-    border: .2vw solid black
+    border: .2vw solid black;
+    cursor: not-allowed;
 }
 
 .parent-container-score {
@@ -86,6 +87,8 @@ border: 2px solid black;
     padding:1vw;
     border: 1px solid black;
 }
+
+
 
 footer {
     background-color: gray;

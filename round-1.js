@@ -14,14 +14,20 @@ let playerOneScore = document.getElementById("playerOneScore")
 let playerTwoScore = document.getElementById("playerTwoScore")
 let playerTurn = document.querySelector(".player-turn")
 let nextRound = document.getElementById("next-round")
+let buttons = document.querySelectorAll("button")
+
 playerTurn.textContent = "Player 1 Turn"
 let currentPlayer = playerOneScore
 let passedClicked = false
 pass.disabled = true
 guess.disabled = true
-nextRound.disabled = true
+nextRound.style.pointerEvents= "none"
+
+
+
 
 let updatedQuestions = placeholderQuestions
+
 let natureQuestions = placeholderQuestions.slice(0,10)
 
 let animalQuestions = placeholderQuestions.slice(10,20)
@@ -34,17 +40,13 @@ let historyQuestions = placeholderQuestions.slice(40,50)
 
 let generalQuestions = placeholderQuestions.slice(50,60)
 
-console.log(placeholderQuestions)
-
-let buttons = document.querySelectorAll("button")
 
 
 
 function disableButtons (event){
     buttons.forEach(button=>{
-        if (button != event.target) {
             button.disabled = true;}
-        })}
+        )}
 
 
  function chooseQuestion(button){
@@ -94,7 +96,7 @@ function disableButtons (event){
              break;
      } 
      updatedQuestions= updatedQuestions.filter(questions => questions != qObject)
-     console.log(updatedQuestions)
+
 
     }
 
@@ -102,7 +104,6 @@ function checkAnswer(question){
         if ((passedClicked == true && userInput.value.toLowerCase().trim() != question.answer.toLowerCase().trim()) || trys ==1 && userInput.value.toLowerCase().trim() != question.answer.toLowerCase().trim())  {
             alert("Wrong. Choose another question")
             trys = 0
-
             passedClicked = false
             buttons.forEach(btn => {
             btn.disabled = false;})
@@ -141,11 +142,14 @@ function checkAnswer(question){
             }
 
 
-            if (playerOneScore1 >= 15000 || playerTwoScore2 >= 15000 || updatedQuestions.length == 30){
-                alert("You can now move on to round 2")
+            if (playerOneScore1 >=15000 || playerTwoScore2 >= 15000 || updatedQuestions.length == 30){
+                alert("You must now move on to round 2. Please click the 'next round' button.")
                 buttons.forEach(btn => {
                     btn.disabled = true;})
-                nextRound.disabled = false
+                guess.disabled = true
+                pass.disabled = true
+                nextRound.style.pointerEvents = "auto"
+                
                 
                 }
         }
@@ -193,6 +197,8 @@ buttons.forEach(button => {
         chooseQuestion(clickedButton)})})
 
 
+
+
 pass.addEventListener("click", event => {
     event.preventDefault()
     passedClicked = true
@@ -215,9 +221,12 @@ pass.addEventListener("click", event => {
 
 guess.addEventListener("click", event =>{
     event.preventDefault()
-    console.log(passedClicked)
     checkAnswer(qObject)
-    console.log(trys, passedClicked)
     })
 
-module.exports =  {natureQuestions,animalQuestions,historyQuestions,mythologyQuestions,generalQuestions ,computerQuestions, updatedQuestions, playerOneScore1, playerTwoScore2, switchVariable, playerNum, currentPlayer};
+
+function exportData(){
+    natureQuestions
+}
+
+// module.exports = exportData

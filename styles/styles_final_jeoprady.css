@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+h1 {
+    font-size: 5vw;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 1vw;
+}
+
+.player-turn {
+    font-size: 3vw;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 1vw;
+}
+
+
+
+.final-parent {
+    display: flex;
+    flex-direction: column;
+    margin-right: 25vw ;
+    margin-left:  25vw;
+    margin-top: 2vw;
+}
+
+.final-category {
+    background-color: gray;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 3vw;
+    padding-top: .5vw;
+    padding-bottom: .5vw;
+}
+
+
+.final-question {
+    display:flex;
+    justify-content: center;
+    border: 1px solid black;
+    margin-top: 2vw;
+    height: 10vw;
+    text-align: center;
+    padding-top: 7vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3vw;
+}
+
+
+.input-parent {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1vw;
+    align-items: center;
+}
+    
+.user-input {display: flex;
+    justify-content: center;
+    margin-top: 1vw;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 15vw;
+    font-size: 1.5vw;
+    padding: .5vw;
+}
+
+
+.bet-div {
+    display: flex;
+    justify-content: center;
+} 
+
+.bet-button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2vw;
+    background-color: gray;
+    border: 1px solid black;
+    margin-top: 1vw;
+    width: 8vw;
+} 
+
+
+footer {
+    background-color: gray;
+    border: 1px solid black;
+    text-align: center;
+    margin-top: 15vw;
+    margin-right: 18vw ;
+    margin-left:  18vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3vw;
+    padding: .5vw;
+}
+
+
+
+
+        
+
+

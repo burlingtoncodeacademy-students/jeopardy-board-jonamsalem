@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/styles_round2.css">
+    <link rel="stylesheet" href="styles/styles_round1.css">
     <title>Jeopardy</title>
   </head>
-  
+
   <body>
-        <!-- Do not change the script source. Allows import/export to work. -->
-        <script src="./scripts/index.js" type="module"></script>
+    <!-- Do not change the script source. Allows import/export to work. -->
+    <script src="./scripts/index.js" type="module"></script>
 
     <h1>SECOND ROUND</h1>
 
@@ -22,97 +23,95 @@
     <table class="table">
       <thead>
       <tr class="category-row">
-        <td>CATEGORY</td>
-        <td>CATEGORY</td>
-        <td>CATEGORY</td>
-        <td>CATEGORY</td>
-        <td>CATEGORY</td>
-        <td>CATEGORY</td>
+        <td>Nature</td>
+        <td>Animals</td>
+        <td>Computers</td>
+        <td>Mythology</td>
+        <td>History</td>
+        <td>General</td>
       </tr>
     </thead>
 
-   
-    <tr class="row1">
-      <td><button class ="nature">200</button></td>
-      <td><button class ="animals">200</button></td>
-      <td><button class ="comp">200</button></td>
-      <td><button class ="mythology">200</button></td>
-      <td><button class ="history">200</button></td>
-      <td><button class ="general">200</button></td>
-    </tr>
+      <tr class="row1">
+        <td><button class ="nature">100</button></td>
+        <td><button class ="animals">100</button></td>
+        <td><button class ="computers">100</button></td>
+        <td><button class ="mythology">100</button></td>
+        <td><button class ="history">100</button></td>
+        <td><button class ="general">100</button></td>
+      </tr>
 
-    <tr class="row2">
-      <td><button class ="nature">400</button></td>
-      <td><button class ="animals">400</button></td>
-      <td><button class ="comp">400</button></td>
-      <td><button class ="mythology">400</button></td>
-      <td><button class ="history">400</button></td>
-      <td><button class ="general">400</button></td>
-    </tr>
+      <tr class="row2">
+        <td><button class ="nature">200</button></td>
+        <td><button class ="animals">200</button></td>
+        <td><button class ="computers">200</button></td>
+        <td><button class ="mythology">200</button></td>
+        <td><button class ="history">200</button></td>
+        <td><button class ="general">200</button></td>
+      </tr>
+      
+      <tr class="row3">
+        <td><button class ="nature">300</button></td>
+        <td><button class ="animals">300</button></td>
+        <td><button class ="computers">300</button></td>
+        <td><button class ="mythology">300</button></td>
+        <td><button class ="history">300</button></td>
+        <td><button class ="general">300</button></td>
+      </tr>
 
-    <tr class="row3">
-      <td><button class ="nature">600</button></td>
-      <td><button class ="animals">600</button></td>
-      <td><button class ="comp">600</button></td>
-      <td><button class ="mythology">600</button></td>
-      <td><button class ="history">600</button></td>
-      <td><button class ="general">600</button></td>
-    </tr>
 
 
-    <tr class="row4">
-      <td><button class ="nature">800</button></td>
-      <td><button class ="animals">800</button></td>
-      <td><button class ="comp">800</button></td>
-      <td><button class ="mythology">800</button></td>
-      <td><button class ="history">800</button></td>
-      <td><button class ="general">800</button></td>
-    </tr>
+      <tr class="row4">
+        <td><button class ="nature">400</button></td>
+        <td><button class ="animals">400</button></td>
+        <td><button class ="computers">400</button></td>
+        <td><button class ="mythology">400</button></td>
+        <td><button class ="history">400</button></td>
+        <td><button class ="general">400</button></td>
+      </tr>
 
-    <tr class="row5">
-      <td><button class ="nature">1000</button></td>
-      <td><button class ="animals">1000</button></td>
-      <td><button class ="comp">1000</button></td>
-      <td><button class ="mythology">1000</button></td>
-      <td><button class ="history">1000</button></td>
-      <td><button class ="general">1000</button></td>
-    </tr>
-
+      <tr class="row5">
+        <td><button class ="nature" >500</button></td>
+        <td><button class ="animals">500</button></td>
+        <td><button class ="computers">500</button></td>
+        <td><button class ="mythology">500</button></td>
+        <td><button class ="history">500</button></td>
+        <td><button class ="general">500</button></td>
+      </tr>
 
       
     </table>
+      <!-- table consisting of all the rows and columns for round 1 -->
 
 
-      <!-- above is a table consisting of all the rows and columns for round 1 -->
-
-
-  <div class="parent-container-form">
-`  <!-- container for button and both forms-->
+  <form class="parent-container-form">
+    <!-- container for form and both buttons -->
 
       <input class= "user-input" placeholder="User input..."> </input>
 
       <div class="button-container"> 
 
-            <button class = "button">GUESS</button> 
-            <button class = "button">PASS</button> 
+            <input id = "guess" placeholder="GUESS"></input> 
+            <input id = "pass" placeholder="PASS">PASS</input> 
         </div>
-   </div>
+      </form>
 
 
   
    <div class="parent-container-score">
-       <!-- container for both user scores -->
+    <!-- container for both user scores -->
 
-        <div>Player 1 Score: 0</div> 
-        <div>Player 2 Score: 0</div> 
+        <div id="playerOneScore">Player 1 Score: 0</div> 
+        <div id="playerTwoScore">Player 2 Score: 0</div> 
   </div>
 
 
-  <button class = "next-round" onclick = "window.location.href='final-jeopardy.html';">Next Round</button>
-  <!-- button that sends user to final round -->
+  <button id="next-round" onclick = "window.location.href='round-2.html';">Next Round</button>
+
+  <!-- button that sends user to round 2 -->
 
   <footer>FOOTER SITE INFORMATION</footer>
 
-
+  <script src="round-2.js" type="module" ></script>
   </body>
 </html>

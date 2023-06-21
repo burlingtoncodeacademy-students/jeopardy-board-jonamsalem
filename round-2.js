@@ -5,7 +5,6 @@ let playerTwoScore2 = 0
 let playerNum = 1
 let switchVariable = 1
 let qObject
-let trys = 0
 let question
 let guess = document.querySelector("#guess")
 let pass = document.querySelector("#pass")
@@ -93,12 +92,11 @@ function disableButtons (event){
     }
 
 function checkAnswer(question){
-        if ((passedClicked == true && userInput.value.toLowerCase().trim() != question.answer.toLowerCase().trim()) || trys ==1){
+        if (passedClicked == true && userInput.value.toLowerCase().trim() != question.answer.toLowerCase().trim()){
             alert("Wrong. Choose another question")
             buttons.forEach(btn => {
             btn.disabled = false;})
             passedClicked = false
-            trys =0
 
             if (switchVariable == 1){
                 playerOneScore1 -= Number(clickedButton[0].textContent)
@@ -135,7 +133,6 @@ function checkAnswer(question){
         }
         else{
             alert(`Wrong. Other Player's turn. ${question.question}`)
-            trys +=1
             if (switchVariable ==1){
                 playerOneScore1 -= Number(clickedButton[0].textContent)
                 currentPlayer.textContent = `Player ${playerNum} Score : ${playerOneScore1}`
@@ -196,12 +193,8 @@ pass.addEventListener("click", event => {
 })
 
 guess.addEventListener("click", event =>{
-    pass.disabled = true
-    guess.disabled = true
+    pass.disabled = false
     event.preventDefault()
     console.log(passedClicked)
     checkAnswer(qObject)
     })
-
-
-export default (natureQuestions,animalQuestions,historyQuestions,mythologyQuestions,generalQuestions,computerQuestions, playerOneScore1, playerTwoScore2, switchVariable);

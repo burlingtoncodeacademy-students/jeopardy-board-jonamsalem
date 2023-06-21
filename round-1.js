@@ -21,6 +21,7 @@ pass.disabled = true
 guess.disabled = true
 nextRound.disabled = true
 
+let updatedQuestions = placeholderQuestions
 let natureQuestions = placeholderQuestions.slice(0,10)
 
 let animalQuestions = placeholderQuestions.slice(10,20)
@@ -32,6 +33,8 @@ let mythologyQuestions = placeholderQuestions.slice(30,40)
 let historyQuestions = placeholderQuestions.slice(40,50)
 
 let generalQuestions = placeholderQuestions.slice(50,60)
+
+console.log(placeholderQuestions)
 
 let buttons = document.querySelectorAll("button")
 
@@ -90,15 +93,20 @@ function disableButtons (event){
              generalQuestions = generalQuestions.filter(questions => questions != qObject)
              break;
      } 
+     updatedQuestions= updatedQuestions.filter(questions => questions != qObject)
+     console.log(updatedQuestions)
+
     }
 
 function checkAnswer(question){
-        if ((passedClicked == true && userInput.value.toLowerCase().trim() != question.answer.toLowerCase().trim()) || trys ==1){
+        if ((passedClicked == true && userInput.value.toLowerCase().trim() != question.answer.toLowerCase().trim()) || trys ==1 && userInput.value.toLowerCase().trim() != question.answer.toLowerCase().trim())  {
             alert("Wrong. Choose another question")
+            passedClicked = false
             buttons.forEach(btn => {
             btn.disabled = false;})
-            passedClicked = false
-            trys =0
+            guess.disabled = true
+            pass.disabled = true
+            trys = 0
 
             if (switchVariable == 1){
                 playerOneScore1 -= Number(clickedButton[0].textContent)
@@ -112,6 +120,7 @@ function checkAnswer(question){
                 }
         }
         else if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
+            trys = 0
             alert("Nice, you get another question")
             buttons.forEach(btn => {
             btn.disabled = false;})
@@ -128,13 +137,18 @@ function checkAnswer(question){
             }
 
 
-            if (playerOneScore1 >= 15000 || playerTwoScore2 >= 15000){
+            if (playerOneScore1 >= 15000 || playerTwoScore2 >= 15000 || updatedQuestions.length == 30){
                 alert("You can now move on to round 2")
+                buttons.forEach(btn => {
+                    btn.disabled = true;})
+                nextRound.disabled = false
                 
                 }
         }
         else{
             alert(`Wrong. Other Player's turn. ${question.question}`)
+            guess.disabled = false
+            pass.disabled = false
             trys +=1
             if (switchVariable ==1){
                 playerOneScore1 -= Number(clickedButton[0].textContent)
@@ -196,11 +210,10 @@ pass.addEventListener("click", event => {
 })
 
 guess.addEventListener("click", event =>{
-    pass.disabled = true
-    guess.disabled = true
     event.preventDefault()
     console.log(passedClicked)
     checkAnswer(qObject)
+    console.log(trys, passedClicked)
     })
 
 

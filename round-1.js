@@ -224,9 +224,3 @@ guess.addEventListener("click", event =>{
     checkAnswer(qObject)
     })
 
-
-function exportData(){
-    natureQuestions
-}
-
-// module.exports = exportData

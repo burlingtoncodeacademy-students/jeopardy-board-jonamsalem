@@ -2,7 +2,6 @@ import placeholderQuestions from "./scripts/placeholder-questions.js";
 let clickedButton
 let playerOneScore1 = 0
 let playerTwoScore2 = 0
-let playerNum = 1
 let switchVariable = 1
 let qObject
 let trys = 0
@@ -10,8 +9,8 @@ let question
 let guess = document.querySelector("#guess")
 let pass = document.querySelector("#pass")
 let userInput = document.querySelector(".user-input")
-let playerOneScore = document.getElementById("playerOneScore")
-let playerTwoScore = document.getElementById("playerTwoScore")
+let playerOne = document.getElementById("playerOneScore")
+let playerTwo = document.getElementById("playerTwoScore")
 let playerTurn = document.querySelector(".player-turn")
 let nextRound = document.getElementById("next-round")
 let buttons = document.querySelectorAll("button")
@@ -28,18 +27,18 @@ nextRound.style.pointerEvents= "none"
 
 let updatedQuestions = placeholderQuestions
 
-let natureQuestions = placeholderQuestions.slice(0,10)
+let natureQuestions = placeholderQuestions.slice(0,5)
 
-let animalQuestions = placeholderQuestions.slice(10,20)
+let animalQuestions = placeholderQuestions.slice(10,15)
 
-let computerQuestions = placeholderQuestions.slice(20,30)
+let computerQuestions = placeholderQuestions.slice(20,25)
 
-let mythologyQuestions = placeholderQuestions.slice(30,40)
+let mythologyQuestions = placeholderQuestions.slice(30,35)
 
-let historyQuestions = placeholderQuestions.slice(40,50)
+let historyQuestions = placeholderQuestions.slice(40, 45)
 
-let generalQuestions = placeholderQuestions.slice(50,60)
-
+let generalQuestions = placeholderQuestions.slice(50,55)
+console.log(natureQuestions)
 
 
 
@@ -101,7 +100,7 @@ function disableButtons (event){
     }
 
 function checkAnswer(question){
-        if ((passedClicked == true && userInput.value.toLowerCase().trim() != question.answer.toLowerCase().trim()) || trys ==1 && userInput.value.toLowerCase().trim() != question.answer.toLowerCase().trim())  {
+        if ((passedClicked == true && userInput.value.toLowerCase().trim() != question.answer.toLowerCase()) || trys ==1 && userInput.value.toLowerCase().trim() != question.answer.toLowerCase()){
             alert("Wrong. Choose another question")
             trys = 0
             passedClicked = false
@@ -112,15 +111,14 @@ function checkAnswer(question){
 
             if (switchVariable == 1){
                 playerOneScore1 -= Number(clickedButton[0].textContent)
-                currentPlayer.textContent = `Player ${playerNum} Score : ${playerOneScore1}`
-                userInput.value = ""}
+                currentPlayer.textContent = `Player 1 Score : ${playerOneScore1}`
+                }
     
                 else if (switchVariable == -1){
                     playerTwoScore2 -= Number(clickedButton[0].textContent)
-                    currentPlayer.textContent = `Player ${playerNum} Score : ${playerTwoScore2}`
-                    userInput.value = ""
+                    currentPlayer.textContent = `Player 2 Score : ${playerTwoScore2}`
                 }
-        }
+            }
         else if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
             trys = 0
             guess.disabled = true
@@ -132,17 +130,16 @@ function checkAnswer(question){
 
             if (switchVariable == 1){
             playerOneScore1 += Number(clickedButton[0].textContent)
-            currentPlayer.textContent = `Player ${playerNum} Score : ${playerOneScore1}`
-            userInput.value = ""}
+            currentPlayer.textContent = `Player 1 Score : ${playerOneScore1}`
+            }
 
             else if (switchVariable == -1){
                 playerTwoScore2 += Number(clickedButton[0].textContent)
-                currentPlayer.textContent = `Player ${playerNum} Score : ${playerTwoScore2}`
-                userInput.value = ""
+                currentPlayer.textContent = `Player 2 Score : ${playerTwoScore2}`
             }
 
 
-            if (playerOneScore1 >=15000 || playerTwoScore2 >= 15000 || updatedQuestions.length == 30){
+            if (playerOneScore1 >=500 || playerTwoScore2 >= 500 || updatedQuestions.length == 30){
                 alert("You must now move on to round 2. Please click the 'next round' button.")
                 buttons.forEach(btn => {
                     btn.disabled = true;})
@@ -160,23 +157,21 @@ function checkAnswer(question){
             trys +=1
             if (switchVariable ==1){
                 playerOneScore1 -= Number(clickedButton[0].textContent)
-                currentPlayer.textContent = `Player ${playerNum} Score : ${playerOneScore1}`
+                currentPlayer.textContent = `Player 1 Score : ${playerOneScore1}`
             }
             else if (switchVariable == -1){
                 playerTwoScore2 -= Number(clickedButton[0].textContent)
-                currentPlayer.textContent = `Player ${playerNum} Score : ${playerTwoScore2}`
+                currentPlayer.textContent = `Player 2 Score : ${playerTwoScore2}`
             }
             switchVariable *= -1
             switch(switchVariable){
                 case -1:
                     playerTurn.textContent = "Player 2 Turn"
-                    playerNum = 2
-                    currentPlayer = playerTwoScore
+                    currentPlayer = playerTwo
                     break;
                 case 1:
                     playerTurn.textContent = "Player 1 Turn"
-                    playerNum = 1
-                    currentPlayer = playerOneScore
+                    currentPlayer = playerOne
                     break;
 
             }
@@ -197,6 +192,9 @@ buttons.forEach(button => {
         chooseQuestion(clickedButton)})})
 
 
+nextRound.addEventListener("click", event =>{
+
+    window.location.replace(`round-2.html?switchVariable=${switchVariable}&playerOneScore=${playerOneScore1}&playerTwoScore=${playerTwoScore2}`)})
 
 
 pass.addEventListener("click", event => {
@@ -207,13 +205,11 @@ pass.addEventListener("click", event => {
     switch(switchVariable){
         case -1:
             playerTurn.textContent = "Player 2 Turn"
-            playerNum = 2
-            currentPlayer = playerTwoScore
+            currentPlayer = playerTwo
             break;
         case 1:
             playerTurn.textContent = "Player 1 Turn"
-            playerNum = 1
-            currentPlayer = playerOneScore
+            currentPlayer = playerOne
             break;}
     alert (`Other player's turn... ${qObject.question}`)
     

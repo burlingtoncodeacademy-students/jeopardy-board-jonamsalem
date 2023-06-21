@@ -101,12 +101,13 @@ function disableButtons (event){
 function checkAnswer(question){
         if ((passedClicked == true && userInput.value.toLowerCase().trim() != question.answer.toLowerCase().trim()) || trys ==1 && userInput.value.toLowerCase().trim() != question.answer.toLowerCase().trim())  {
             alert("Wrong. Choose another question")
+            trys = 0
+
             passedClicked = false
             buttons.forEach(btn => {
             btn.disabled = false;})
             guess.disabled = true
             pass.disabled = true
-            trys = 0
 
             if (switchVariable == 1){
                 playerOneScore1 -= Number(clickedButton[0].textContent)
@@ -121,6 +122,9 @@ function checkAnswer(question){
         }
         else if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
             trys = 0
+            guess.disabled = true
+            pass.disabled = true
+            passedClicked = false
             alert("Nice, you get another question")
             buttons.forEach(btn => {
             btn.disabled = false;})
@@ -148,7 +152,7 @@ function checkAnswer(question){
         else{
             alert(`Wrong. Other Player's turn. ${question.question}`)
             guess.disabled = false
-            pass.disabled = false
+            pass.disabled = true
             trys +=1
             if (switchVariable ==1){
                 playerOneScore1 -= Number(clickedButton[0].textContent)
@@ -216,5 +220,4 @@ guess.addEventListener("click", event =>{
     console.log(trys, passedClicked)
     })
 
-
-export default (natureQuestions,animalQuestions,historyQuestions,mythologyQuestions,generalQuestions,computerQuestions, playerOneScore1, playerTwoScore2, switchVariable);
+module.exports =  {natureQuestions,animalQuestions,historyQuestions,mythologyQuestions,generalQuestions ,computerQuestions, updatedQuestions, playerOneScore1, playerTwoScore2, switchVariable, playerNum, currentPlayer};

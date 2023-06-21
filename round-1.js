@@ -16,13 +16,11 @@ let nextRound = document.getElementById("next-round")
 let buttons = document.querySelectorAll("button")
 
 playerTurn.textContent = "Player 1 Turn"
-let currentPlayer = playerOneScore
+
 let passedClicked = false
 pass.disabled = true
 guess.disabled = true
 nextRound.style.pointerEvents= "none"
-
-
 
 
 let updatedQuestions = placeholderQuestions
@@ -38,7 +36,7 @@ let mythologyQuestions = placeholderQuestions.slice(30,35)
 let historyQuestions = placeholderQuestions.slice(40, 45)
 
 let generalQuestions = placeholderQuestions.slice(50,55)
-console.log(natureQuestions)
+
 
 
 
@@ -111,12 +109,12 @@ function checkAnswer(question){
 
             if (switchVariable == 1){
                 playerOneScore1 -= Number(clickedButton[0].textContent)
-                currentPlayer.textContent = `Player 1 Score : ${playerOneScore1}`
+                playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
                 }
     
                 else if (switchVariable == -1){
                     playerTwoScore2 -= Number(clickedButton[0].textContent)
-                    currentPlayer.textContent = `Player 2 Score : ${playerTwoScore2}`
+                    playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
                 }
             }
         else if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
@@ -130,16 +128,16 @@ function checkAnswer(question){
 
             if (switchVariable == 1){
             playerOneScore1 += Number(clickedButton[0].textContent)
-            currentPlayer.textContent = `Player 1 Score : ${playerOneScore1}`
+            playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
             }
 
             else if (switchVariable == -1){
                 playerTwoScore2 += Number(clickedButton[0].textContent)
-                currentPlayer.textContent = `Player 2 Score : ${playerTwoScore2}`
+                playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
             }
 
 
-            if (playerOneScore1 >=500 || playerTwoScore2 >= 500 || updatedQuestions.length == 30){
+            if (playerOneScore1 >= 15000 || playerTwoScore2 >= 15000 || updatedQuestions.length == 30){
                 alert("You must now move on to round 2. Please click the 'next round' button.")
                 buttons.forEach(btn => {
                     btn.disabled = true;})
@@ -157,21 +155,19 @@ function checkAnswer(question){
             trys +=1
             if (switchVariable ==1){
                 playerOneScore1 -= Number(clickedButton[0].textContent)
-                currentPlayer.textContent = `Player 1 Score : ${playerOneScore1}`
+                playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
             }
             else if (switchVariable == -1){
                 playerTwoScore2 -= Number(clickedButton[0].textContent)
-                currentPlayer.textContent = `Player 2 Score : ${playerTwoScore2}`
+                playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
             }
             switchVariable *= -1
             switch(switchVariable){
                 case -1:
                     playerTurn.textContent = "Player 2 Turn"
-                    currentPlayer = playerTwo
                     break;
                 case 1:
                     playerTurn.textContent = "Player 1 Turn"
-                    currentPlayer = playerOne
                     break;
 
             }
@@ -182,8 +178,6 @@ function checkAnswer(question){
             userInput.value = ""
 
         }
-            
-             
 buttons.forEach(button => {
     button.addEventListener("click", disableButtons)
     button.addEventListener("click", () => {
@@ -194,7 +188,7 @@ buttons.forEach(button => {
 
 nextRound.addEventListener("click", event =>{
 
-    window.location.replace(`round-2.html?switchVariable=${switchVariable}&playerOneScore=${playerOneScore1}&playerTwoScore=${playerTwoScore2}`)})
+    window.location.replace(`round-2.html?switchVariable=${switchVariable}&playerOneScore1=${playerOneScore1}&playerTwoScore2=${playerTwoScore2}`)})
 
 
 pass.addEventListener("click", event => {
@@ -205,11 +199,9 @@ pass.addEventListener("click", event => {
     switch(switchVariable){
         case -1:
             playerTurn.textContent = "Player 2 Turn"
-            currentPlayer = playerTwo
             break;
         case 1:
             playerTurn.textContent = "Player 1 Turn"
-            currentPlayer = playerOne
             break;}
     alert (`Other player's turn... ${qObject.question}`)
     

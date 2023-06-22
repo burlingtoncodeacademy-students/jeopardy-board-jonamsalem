@@ -33,7 +33,7 @@ h1 {
     border: 1px solid black;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    font-size: 3vw;
+    font-size: 2.2vw;
     padding-top: .5vw;
     padding-bottom: .5vw;
 }
@@ -59,7 +59,7 @@ h1 {
     align-items: center;
 }
     
-.user-input {display: flex;
+#user-input,#user-input2 {display: flex;
     justify-content: center;
     margin-top: 1vw;
     font-family: Arial, Helvetica, sans-serif;
@@ -72,9 +72,10 @@ h1 {
 .bet-div {
     display: flex;
     justify-content: center;
+    gap: .5em;
 } 
 
-.bet-button {
+#bet-button {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2vw;
     background-color: gray;
@@ -83,6 +84,14 @@ h1 {
     width: 8vw;
 } 
 
+#guess-button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2vw;
+    background-color: gray;
+    border: 1px solid black;
+    margin-top: 1vw;
+    width: 8vw;
+}
 
 footer {
     background-color: gray;

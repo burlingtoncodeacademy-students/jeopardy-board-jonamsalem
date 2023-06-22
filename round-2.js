@@ -149,8 +149,8 @@ function checkAnswer(question){
             }
 
 
-            if (playerOneScore1 >=30000 || playerTwoScore2 >= 30000 || updatedQuestions.length == 30){
-                alert("You must now move on to round 2. Please click the 'next round' button.")
+            if (playerOneScore1 >=800 || playerTwoScore2 >= 800 || updatedQuestions.length == 30){
+                alert("You must now move on to the last round. Please click the 'next round' button.")
                 buttons.forEach(btn => {
                     btn.disabled = true;})
                 guess.disabled = true
@@ -202,7 +202,7 @@ buttons.forEach(button => {
 
 nextRound.addEventListener("click", event =>{
 
-    window.location.replace(`round-2.html?switchVariable=${switchVariable}&playerOneScore1=${playerOneScore1}&playerTwoScore2=${playerTwoScore2}`)})
+    window.location.replace(`final-jeopardy.html?switchVariable=${switchVariable}&playerOneScore1=${playerOneScore1}&playerTwoScore2=${playerTwoScore2}`)})
 
 
 pass.addEventListener("click", event => {

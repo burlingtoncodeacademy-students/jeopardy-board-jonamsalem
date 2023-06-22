@@ -137,7 +137,7 @@ function checkAnswer(question){
             }
 
 
-            if (playerOneScore1 >= 15000 || playerTwoScore2 >= 15000 || updatedQuestions.length == 30){
+            if (playerOneScore1 >= 500 || playerTwoScore2 >= 500 || updatedQuestions.length == 30){
                 alert("You must now move on to round 2. Please click the 'next round' button.")
                 buttons.forEach(btn => {
                     btn.disabled = true;})

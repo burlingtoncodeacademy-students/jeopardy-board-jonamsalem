@@ -52,31 +52,34 @@ function checkAnswer(guessList){
         playerTwoScore2 -= Number(playersBet[0])
     }
     
-    // check whixh player has more points and declare winner
+    // check which player has more points and declare winner
     playerOneScore1 > playerTwoScore2
-    ? alert (`Player one Score won with ${playerOneScore1} points`)
-    : playerOneScore1 = playerTwoScore2 
-    ? alert (`Player one and two have the same amount of points. Player One points : ${playerOneScore1}. Player two points:${playerTwoScore2}`)
-    : alert (`Player 2 won with ${playerTwoScore2} points`)
+    ? alert (`Player one won with ${playerOneScore1} points`)
+    : playerOneScore1 == playerTwoScore2 
+    ? alert (`Player one and two have the same amount of points. Player One points : ${playerOneScore1}. Player two points: ${playerTwoScore2}`)
+    : alert (`Player two won with ${playerTwoScore2} points`)
 
 }
 
-//alert bet was made. clicksBet = 0
+//alert bet was made. clicksBet = 0 
 betButton.addEventListener("click", event => {
     event.preventDefault()
      // clickbet used to alert which player made their wager
     clicksBet +=1
+
     if (clicksBet == 1){
-    alert ("Player one made their wager")}
-    playerTurn.textContent = "PLAYER 2 GUESS "
-    // push the wager into an array for later use
-    playersBet.push(wager.value)
-    wager.value = ""
+        alert ("Player one made their wager")
+        playerTurn.textContent = "PLAYER 2 WAGER "
+        // push the wager into an array for later use in checkAnswer
+        playersBet.push(wager.value)
+    }
     
-    if (clicksBet == 2) {
+    else if (clicksBet == 2) {
         alert("Player 2 made their wager")
+        playersBet.push(wager.value)
         betButton.disabled = true;
-        wager.value = ""
+
+        // setTimeout to prepare question and change player's turn text context. Increasing timeout to give players time to see each message
         setTimeout(() => {
             alert("Ok... Preparing for your question")
         }, 1000);
@@ -88,33 +91,41 @@ betButton.addEventListener("click", event => {
         }, 8000);
            
     }
+    wager.value = ""
 })
 
+//alert guess was made. clicksGuess = 0
 guessButton.addEventListener("click", event => {
     event.preventDefault()
     clicksGuess +=1
+
     if (clicksGuess == 1){
-    playerTurn.textContent = "PLAYER 2 GUESS "
-    alert ("Player one made their guess")}
-    playerGuess.push(finalAnswer.value)
-    finalAnswer.value = ""
+        alert ("Player one made their guess")
+        playerTurn.textContent = "PLAYER 2 GUESS "
+        // push the guess into an array for later use in checkAnswer
+        playerGuess.push(finalAnswer.value)
+    }
+
     if (clicksGuess == 2) {
         alert("Player 2 made their guess")
-        betButton.disabled = true;
-        finalAnswer.value = ""
+        playerGuess.push(finalAnswer.value)
+        guessButton.disabled = true
+
+        // setTimeout placed in order with increasing timeout to give players time to see each message
         setTimeout(() => {
             alert("Ok... LET'S SEE WHO WON")
         }, 2000);
+
         setTimeout(() => {
-        finalQuestion.textContent = `answer : ${lastQuestion.answer}`
+        finalQuestion.textContent = `ANSWER : ${lastQuestion.answer}`
            checkAnswer(playerGuess)
-        }, 5000);
-        
+        }, 8000);
+
     }
+    finalAnswer.value = ""
     
 })
 
-// check answer not working 
 
 
 

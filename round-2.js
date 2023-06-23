@@ -115,87 +115,119 @@ function disableButtons (event){
     }
 
 function checkAnswer(question){
-        if ((passedClicked == true && userInput.value.toLowerCase().trim() != question.answer.toLowerCase()) || trys ==1 && userInput.value.toLowerCase().trim() != question.answer.toLowerCase()){
-            alert("Wrong. Choose another question")
-            trys = 0
-            passedClicked = false
+console.log(passedClicked, trys)
+    // answer was correct 
+    if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
+        // reset trys if one answered wrong and other answered correct
+        trys = 0
+        guess.disabled = true
+        pass.disabled = true
+        passedClicked = false
+        alert("Nice, you get another question")
+        buttons.forEach(btn => {
+        btn.disabled = false;})
+
+            // add points based on whose turn it is 
+        if (switchVariable == 1){
+        playerOneScore1 += Number(clickedButton[0].textContent)
+        playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
+        }
+        else if (switchVariable == -1){
+            playerTwoScore2 += Number(clickedButton[0].textContent)
+            playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
+        }
+
+
+        if (playerOneScore1 >= 30000 || playerTwoScore2 >= 30000 || updatedQuestions.length == 30){
+            alert("You must now move on to round 2. Please click the 'next round' button.")
             buttons.forEach(btn => {
-            btn.disabled = false;})
+                btn.disabled = true;})
             guess.disabled = true
             pass.disabled = true
+            nextRound.style.pointerEvents = "auto"
+            
+            
+            }
+    }
+    // player answered wrong and trys increase by one to ensure that question will not be asked again
+    else if (userInput.value.toLowerCase().trim() != question.answer.toLowerCase()){
+            if (passedClicked == true){
+                alert("Wrong. Choose another question")
+                // reset trys to differentiate whether one or two players guessed on one question
+                // reset pass button
+                passedClicked = false
+                // enable question buttons
+                buttons.forEach(btn => {
+                btn.disabled = false;})
+                // disable guess and pass buttons
+                guess.disabled = true
+                pass.disabled = true
+                if (switchVariable ==1){
+                    playerOneScore1 -= Number(clickedButton[0].textContent)
+                    playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
+                    }
+                else if (switchVariable == -1){
+                    playerTwoScore2 -= Number(clickedButton[0].textContent)
+                    playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
+                    }
+            }
 
-            if (switchVariable == 1){
-                playerOneScore1 -= Number(clickedButton[0].textContent)
-                playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
+            else if (trys == 1){
+                if (switchVariable ==1){
+                    playerOneScore1 -= Number(clickedButton[0].textContent)
+                    playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
+                    }
+                else if (switchVariable == -1){
+                    playerTwoScore2 -= Number(clickedButton[0].textContent)
+                    playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`}
+                trys = 0
+                alert ("Wrong. Other player must now choose a new question")
+                switchVariable *= -1
+                switch(switchVariable){
+                    case -1:
+                        playerTurn.textContent = "Player 2 Turn"
+                        break;
+                    case 1:
+                        playerTurn.textContent = "Player 1 Turn"
+                        break;
                 }
-    
+                // enable question buttons
+                buttons.forEach(btn => {
+                btn.disabled = false;})
+                // disable guess and pass buttons
+                guess.disabled = true
+                pass.disabled = true
+            }
+            
+            else {
+                alert(`Wrong. Other Player's turn. ${question.question}`)
+                guess.disabled = false
+                pass.disabled = true
+                trys +=1
+                if (switchVariable ==1){
+                    playerOneScore1 -= Number(clickedButton[0].textContent)
+                    playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
+                }
                 else if (switchVariable == -1){
                     playerTwoScore2 -= Number(clickedButton[0].textContent)
                     playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
                 }
-            }
-        else if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
-            trys = 0
-            guess.disabled = true
-            pass.disabled = true
-            passedClicked = false
-            alert("Nice, you get another question")
-            buttons.forEach(btn => {
-            btn.disabled = false;})
-
-            if (switchVariable == 1){
-            playerOneScore1 += Number(clickedButton[0].textContent)
-            playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
-            }
-
-            else if (switchVariable == -1){
-                playerTwoScore2 += Number(clickedButton[0].textContent)
-                playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
-            }
-
-
-            if (playerOneScore1 >=30000 || playerTwoScore2 >= 30000 || updatedQuestions.length == 30){
-                alert("You must now move on to the last round. Please click the 'next round' button.")
-                buttons.forEach(btn => {
-                    btn.disabled = true;})
-                guess.disabled = true
-                pass.disabled = true
-                nextRound.style.pointerEvents = "auto"
+                switchVariable *= -1
                 
-                
-                }
+        switch(switchVariable){
+            case -1:
+                playerTurn.textContent = "Player 2 Turn"
+                break;
+            case 1:
+                playerTurn.textContent = "Player 1 Turn"
+                break;
         }
-        else{
-            alert(`Wrong. Other Player's turn. ${question.question}`)
-            guess.disabled = false
-            pass.disabled = true
-            trys +=1
-            if (switchVariable ==1){
-                playerOneScore1 -= Number(clickedButton[0].textContent)
-                playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
-            }
-            else if (switchVariable == -1){
-                playerTwoScore2 -= Number(clickedButton[0].textContent)
-                playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
-            }
-            switchVariable *= -1
-            switch(switchVariable){
-                case -1:
-                    playerTurn.textContent = "Player 2 Turn"
-                    break;
-                case 1:
-                    playerTurn.textContent = "Player 1 Turn"
-                    break;
-
-            }
+    }
+}
         
-            buttons.forEach(btn => {
-                btn.disabled = false;})
-                    }
-            userInput.value = ""
-
-        }
-            
+        // reset input value
+        userInput.value = ""
+}
              
 buttons.forEach(button => {
     button.addEventListener("click", disableButtons)

@@ -118,6 +118,7 @@ guessButton.addEventListener("click", event => {
 
         setTimeout(() => {
         finalQuestion.textContent = `ANSWER : ${lastQuestion.answer}`
+        playerTurn.textContent = "GAME OVER"
            checkAnswer(playerGuess)
         }, 8000);
 

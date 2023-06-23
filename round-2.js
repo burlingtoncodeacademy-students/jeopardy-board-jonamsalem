@@ -8,8 +8,6 @@ let switchVariable = Number(params.get("switchVariable"))
 let playerOneScore1 = Number(params.get("playerOneScore1"))
 let playerTwoScore2 = Number(params.get("playerTwoScore2"))
 
-console.log(Number(switchVariable))
-
 // declare global variables and access html elements
 let clickedButton
 let qObject
@@ -23,6 +21,8 @@ let playerTwo = document.getElementById("playerTwoScore")
 let playerTurn = document.querySelector(".player-turn")
 let nextRound = document.getElementById("next-round")
 let buttons = document.querySelectorAll("button")
+let modal = document.querySelector(".modal")
+let modalContent = document.querySelector(".modal-content")
 let passedClicked = false
 pass.disabled = true
 guess.disabled = true
@@ -70,42 +70,48 @@ function disableButtons (event){
         case "nature":
              qObject = (natureQuestions[Math.floor(Math.random() * natureQuestions.length)])
              question = qObject.question
-             alert(question)
+             modalContent.textContent = question
+             modal.style.display = "block";
              natureQuestions = natureQuestions.filter(questions => questions != qObject)
 
              break; 
          case "animals":
              qObject = (animalQuestions[Math.floor(Math.random() * animalQuestions.length)])
              question = qObject.question
-             alert(question)
+             modalContent.textContent = question
+             modal.style.display = "block";
              animalQuestions = animalQuestions.filter(questions => questions != qObject)
 
              break;
          case "computers":
              qObject = (computerQuestions[Math.floor(Math.random() * computerQuestions.length)])
              question = qObject.question
-             alert(question)
+             modalContent.textContent = question
+             modal.style.display = "block";
              computerQuestions = computerQuestions.filter(questions => questions != qObject)
 
              break;
          case "mythology":
              qObject = (mythologyQuestions[Math.floor(Math.random() * mythologyQuestions.length)])
              question = qObject.question
-             alert(question)
+             modalContent.textContent = question
+             modal.style.display = "block";
              mythologyQuestions = mythologyQuestions.filter(questions => questions != qObject)
 
              break;
          case "history":
              qObject = (historyQuestions[Math.floor(Math.random() * history.length)])
              question = qObject.question
-             alert(question)
+             modalContent.textContent = question
+             modal.style.display = "block";
              historyQuestions = historyQuestions.filter(questions => questions != qObject)
 
              break;
          case "general":
              qObject = (generalQuestions[Math.floor(Math.random() * generalQuestions.length)])
              question = qObject.question
-             alert(question)
+             modalContent.textContent = question
+             modal.style.display = "block";
              generalQuestions = generalQuestions.filter(questions => questions != qObject)
              break;
      } 
@@ -114,125 +120,130 @@ function disableButtons (event){
 
     }
 
+
+// check answers
 function checkAnswer(question){
-console.log(passedClicked, trys)
-    // answer was correct 
-    if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
-        // reset trys if one answered wrong and other answered correct
-        trys = 0
-        guess.disabled = true
-        pass.disabled = true
-        passedClicked = false
-        alert("Nice, you get another question")
-        buttons.forEach(btn => {
-        btn.disabled = false;})
-
-            // add points based on whose turn it is 
-        if (switchVariable == 1){
-        playerOneScore1 += Number(clickedButton[0].textContent)
-        playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
-        }
-        else if (switchVariable == -1){
-            playerTwoScore2 += Number(clickedButton[0].textContent)
-            playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
-        }
-
-
-        if (playerOneScore1 >= 30000 || playerTwoScore2 >= 30000 || updatedQuestions.length == 30){
-            alert("You must now move on to round 2. Please click the 'next round' button.")
-            buttons.forEach(btn => {
-                btn.disabled = true;})
+        // answer was correct 
+        if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
+            modal.style.display = "none";
+            // reset trys if one answered wrong and other answered correct
+            trys = 0
             guess.disabled = true
             pass.disabled = true
-            nextRound.style.pointerEvents = "auto"
-            
-            
+            passedClicked = false
+            alert("Nice, you get another question")
+            buttons.forEach(btn => {
+            btn.disabled = false;})
+
+             // add points based on whose turn it is 
+            if (switchVariable == 1){
+            playerOneScore1 += Number(clickedButton[0].textContent)
+            playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
             }
-    }
-    // player answered wrong and trys increase by one to ensure that question will not be asked again
-    else if (userInput.value.toLowerCase().trim() != question.answer.toLowerCase()){
-            if (passedClicked == true){
-                alert("Wrong. Choose another question")
-                // reset trys to differentiate whether one or two players guessed on one question
-                // reset pass button
-                passedClicked = false
-                // enable question buttons
-                buttons.forEach(btn => {
-                btn.disabled = false;})
-                // disable guess and pass buttons
-                guess.disabled = true
-                pass.disabled = true
-                if (switchVariable ==1){
-                    playerOneScore1 -= Number(clickedButton[0].textContent)
-                    playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
-                    }
-                else if (switchVariable == -1){
-                    playerTwoScore2 -= Number(clickedButton[0].textContent)
-                    playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
-                    }
+            else if (switchVariable == -1){
+                playerTwoScore2 += Number(clickedButton[0].textContent)
+                playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
             }
 
-            else if (trys == 1){
-                if (switchVariable ==1){
-                    playerOneScore1 -= Number(clickedButton[0].textContent)
-                    playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
-                    }
-                else if (switchVariable == -1){
-                    playerTwoScore2 -= Number(clickedButton[0].textContent)
-                    playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`}
-                trys = 0
-                alert ("Wrong. Other player must now choose a new question")
-                switchVariable *= -1
-                switch(switchVariable){
-                    case -1:
-                        playerTurn.textContent = "Player 2 Turn"
-                        break;
-                    case 1:
-                        playerTurn.textContent = "Player 1 Turn"
-                        break;
-                }
-                // enable question buttons
+            // move to next round if reached 15000 points or round1 board all used
+            if (playerOneScore1 >= 30000 || playerTwoScore2 >= 30000 || updatedQuestions.length == 30){
+                alert("You must now move on to round 2. Please click the 'next round' button.")
                 buttons.forEach(btn => {
-                btn.disabled = false;})
-                // disable guess and pass buttons
+                    btn.disabled = true;})
                 guess.disabled = true
                 pass.disabled = true
-            }
-            
-            else {
-                alert(`Wrong. Other Player's turn. ${question.question}`)
-                guess.disabled = false
-                pass.disabled = true
-                trys +=1
-                if (switchVariable ==1){
-                    playerOneScore1 -= Number(clickedButton[0].textContent)
-                    playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
-                }
-                else if (switchVariable == -1){
-                    playerTwoScore2 -= Number(clickedButton[0].textContent)
-                    playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
-                }
-                switchVariable *= -1
+                nextRound.style.pointerEvents = "auto"
                 
-        switch(switchVariable){
-            case -1:
-                playerTurn.textContent = "Player 2 Turn"
-                break;
-            case 1:
-                playerTurn.textContent = "Player 1 Turn"
-                break;
+                
+                }
+        }
+        // player answered wrong and trys increase by one to ensure that question will not be asked again
+        else if (userInput.value.toLowerCase().trim() != question.answer.toLowerCase()){
+                if (passedClicked == true){
+                    modal.style.display = "none";
+                    alert("Wrong. Choose another question")
+                    // reset trys to differentiate whether one or two players guessed on one question
+                    // reset pass button
+                    passedClicked = false
+                    // enable question buttons
+                    buttons.forEach(btn => {
+                    btn.disabled = false;})
+                    // disable guess and pass buttons
+                    guess.disabled = true
+                    pass.disabled = true
+                    if (switchVariable ==1){
+                        playerOneScore1 -= Number(clickedButton[0].textContent)
+                        playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
+                        }
+                    else if (switchVariable == -1){
+                        playerTwoScore2 -= Number(clickedButton[0].textContent)
+                        playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
+                     }
+                }
+
+                else if (trys == 1){
+                    if (switchVariable ==1){
+                        playerOneScore1 -= Number(clickedButton[0].textContent)
+                        playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
+                        }
+                    else if (switchVariable == -1){
+                        playerTwoScore2 -= Number(clickedButton[0].textContent)
+                        playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`}
+                    trys = 0
+                    modal.style.display = "none";
+                    alert ("Wrong. Other player must now choose a new question")
+                    switchVariable *= -1
+                    switch(switchVariable){
+                        case -1:
+                            playerTurn.textContent = "Player 2 Turn"
+                            break;
+                        case 1:
+                            playerTurn.textContent = "Player 1 Turn"
+                            break;
+                    }
+                    // enable question buttons
+                    buttons.forEach(btn => {
+                    btn.disabled = false;})
+                    // disable guess and pass buttons
+                    guess.disabled = true
+                    pass.disabled = true
+                }
+                
+                else {
+                    alert(`Wrong. Other Player's turn. ${question.question}`)
+                    guess.disabled = false
+                    pass.disabled = true
+                    trys +=1
+                    if (switchVariable ==1){
+                        playerOneScore1 -= Number(clickedButton[0].textContent)
+                        playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
+                    }
+                    else if (switchVariable == -1){
+                        playerTwoScore2 -= Number(clickedButton[0].textContent)
+                        playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
+                    }
+                    switchVariable *= -1
+                    
+            switch(switchVariable){
+                case -1:
+                    playerTurn.textContent = "Player 2 Turn"
+                    break;
+                case 1:
+                    playerTurn.textContent = "Player 1 Turn"
+                    break;
+            }
         }
     }
-}
-        
-        // reset input value
-        userInput.value = ""
-}
-             
+            
+            // reset input value
+            userInput.value = ""
+}             
+// question buttons clicked --> disable other buttons, change clicked button background,     
 buttons.forEach(button => {
     button.addEventListener("click", disableButtons)
     button.addEventListener("click", () => {
         button.style.backgroundColor = "black"
+        // create an array of the chosen question
         clickedButton = Array.from(buttons).filter(btn => btn == button)
         chooseQuestion(clickedButton)})})
 

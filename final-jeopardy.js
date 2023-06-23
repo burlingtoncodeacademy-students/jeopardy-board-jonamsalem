@@ -38,6 +38,7 @@ function checkAnswer(guessList){
     let playerOneAnswer = guessList[0]
     // player two guess correlates to the second answer
     let playerTwoAnswer = guessList[1]
+
 // add or subtract wager based on if answer was correct or wrong. Used if only since each event are mutually exclusive
     if (playerOneAnswer.toLowerCase().trim() == lastQuestion.answer.toLowerCase()){
         playerOneScore1 += Number(playersBet[0])
@@ -66,7 +67,6 @@ betButton.addEventListener("click", event => {
     event.preventDefault()
      // clickbet used to alert which player made their wager
     clicksBet +=1
-
     if (clicksBet == 1){
         alert ("Player one made their wager")
         playerTurn.textContent = "PLAYER 2 WAGER "

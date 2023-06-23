@@ -1,5 +1,7 @@
 import placeholderQuestions from "./scripts/placeholder-questions.js";
 
+
+// declare query params as varaibles for later use
 let url = document.location.search 
 let params = new URLSearchParams(url)
 let switchVariable = Number(params.get("switchVariable"))
@@ -8,7 +10,7 @@ let playerTwoScore2 = Number(params.get("playerTwoScore2"))
 
 console.log(Number(switchVariable))
 
-
+// declare global variables and access html elements
 let clickedButton
 let qObject
 let trys = 0
@@ -24,11 +26,13 @@ let buttons = document.querySelectorAll("button")
 let passedClicked = false
 pass.disabled = true
 guess.disabled = true
-nextRound.style.pointerEvents= "none"
 
+// nextRound disabled
+nextRound.style.pointerEvents= "none"
 
 let updatedQuestions = placeholderQuestions
 
+// second half of the questions
 let natureQuestions = placeholderQuestions.slice(5,10)
 
 let animalQuestions = placeholderQuestions.slice(15,20)
@@ -42,16 +46,17 @@ let historyQuestions = placeholderQuestions.slice(45, 50)
 let generalQuestions = placeholderQuestions.slice(55,60)
 
 
-
+// check which player's turn it is
 switchVariable == 1
 ? playerTurn.textContent= "Player 1 Turn"
 : playerTurn.textContent = "Player 2 Turn"
 
+// display both players' turn
 playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
 playerTwo.textContent = `Player 2 Score: ${playerTwoScore2}`
 
 
-
+// same logic as round 1 from here on
 function disableButtons (event){
     buttons.forEach(button=>{
             button.disabled = true;}

@@ -1,17 +1,16 @@
-import placeholderQuestions from "./scripts/placeholder-questions.js";
+import placeholderQuestions from "./placeholder-questions.js";
 
-// declare query params as varaibles for later use
-let url = document.location.search 
-let params = new URLSearchParams(url)
-let switchVariable = Number(params.get("switchVariable"))
-let playerOneScore1 = Number(params.get("playerOneScore1"))
-let playerTwoScore2 = Number(params.get("playerTwoScore2"))
-
-// declare global variables and access html elements
+// declare global variables for later use
 let clickedButton
+let playerOneScore1 = 0
+let playerTwoScore2 = 0
+// switchvariable determines who's turn it is, starts with player 1
+let switchVariable = 1
 let qObject
 let trys = 0
 let question
+
+// acquire html components for later use
 let guess = document.querySelector("#guess")
 let pass = document.querySelector("#pass")
 let userInput = document.querySelector(".user-input")
@@ -22,6 +21,9 @@ let nextRound = document.getElementById("next-round")
 let buttons = document.querySelectorAll("button")
 let modal = document.querySelector(".modal")
 let modalContent = document.querySelector(".modal-content")
+
+// first- round start features
+playerTurn.textContent = "Player 1 Turn"
 let passedClicked = false
 pass.disabled = true
 guess.disabled = true
@@ -29,33 +31,19 @@ guess.disabled = true
 // nextRound disabled
 nextRound.style.pointerEvents= "none"
 
+// created array that is later used for checking how many questions used
 let updatedQuestions = placeholderQuestions
 
-// second half of the questions
-let natureQuestions = placeholderQuestions.slice(5,10)
-
-let animalQuestions = placeholderQuestions.slice(15,20)
-
-let computerQuestions = placeholderQuestions.slice(25,30)
-
-let mythologyQuestions = placeholderQuestions.slice(35,40)
-
-let historyQuestions = placeholderQuestions.slice(45, 50)
-
-let generalQuestions = placeholderQuestions.slice(55,60)
+// questions by topic, half of the questions
+let natureQuestions = placeholderQuestions.slice(0,5)
+let animalQuestions = placeholderQuestions.slice(10,15)
+let computerQuestions = placeholderQuestions.slice(20,25)
+let mythologyQuestions = placeholderQuestions.slice(30,35)
+let historyQuestions = placeholderQuestions.slice(40, 45)
+let generalQuestions = placeholderQuestions.slice(50,55)
 
 
-// check which player's turn it is
-switchVariable == 1
-? playerTurn.textContent= "Player 1 Turn"
-: playerTurn.textContent = "Player 2 Turn"
-
-// display both players' turn
-playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
-playerTwo.textContent = `Player 2 Score: ${playerTwoScore2}`
-
-
-// Same logic as round 1 from here on
+// disable and enable functions
 function disableButtons (event){
     buttons.forEach(button=>{
             button.disabled = true;}
@@ -67,11 +55,13 @@ function enableButtons (event){
         )}
 
 
+// choose and display question depending where user clicked
  function chooseQuestion(button){
     switch (button[0].className){
         case "nature":
              qObject = (natureQuestions[Math.floor(Math.random() * natureQuestions.length)])
              question = qObject.question
+             // change modal text content and display it
              modalContent.textContent = question
              modal.style.display = "block";
              natureQuestions = natureQuestions.filter(questions => questions != qObject)
@@ -116,23 +106,29 @@ function enableButtons (event){
              modal.style.display = "block";
              generalQuestions = generalQuestions.filter(questions => questions != qObject)
              break;
-     } 
+         } 
+     // create updated array
      updatedQuestions= updatedQuestions.filter(questions => questions != qObject)
+
+     // enable guess and pass buttons
      guess.disabled = false
      pass.disabled = false
-
     }
 
+// check answers
 function checkAnswer(question){
+        // answer was correct and hide modal display
         if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
             modal.style.display = "none";
+            // reset trys if this is second time question was answered
             trys = 0
             guess.disabled = true
             pass.disabled = true
             passedClicked = false
             alert("Nice, you get another question")
             enableButtons()
-            
+
+             // add points based on whose turn it is 
             if (switchVariable == 1){
             playerOneScore1 += Number(clickedButton[0].textContent)
             playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
@@ -142,24 +138,29 @@ function checkAnswer(question){
                 playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
             }
 
-            if (playerOneScore1 >= 30000|| playerTwoScore2 >= 30000 || updatedQuestions.length == 30){
+            // move to next round if reached 15000 points or round1 board all used (31 because needs 30 but function runs before array is updated)
+            if (playerOneScore1 >= 15000 || playerTwoScore2 >= 15000|| updatedQuestions.length  == 31){
                 alert("You must now move on to round 2. Please click the 'next round' button.")
                 disableButtons()
                 guess.disabled = true
                 pass.disabled = true
-                nextRound.style.pointerEvents = "auto"
-                
-                
+                nextRound.style.pointerEvents = "auto" 
                 }
         }
+        // answer incorrectly 
         else if (userInput.value.toLowerCase().trim() != question.answer.toLowerCase()){
+       
+                // If pass was clicked and answer was wrong
                 if (passedClicked == true){
                     modal.style.display = "none";
                     alert("Wrong. Choose another question")
+                    // reset pass button
                     passedClicked = false
+                    // enable question buttons
                     enableButtons()
                     guess.disabled = true
                     pass.disabled = true
+                    // subtract points based on user turn
                     if (switchVariable ==1){
                         playerOneScore1 -= Number(clickedButton[0].textContent)
                         playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
@@ -169,9 +170,17 @@ function checkAnswer(question){
                         playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
                      }
                 }
-
+                // if both answers were wrong
                 else if (trys == 1){
-                    if (switchVariable ==1){
+                    if (updatedQuestions.length == 31){
+                        alert("Wrong. You must now move on to round 2. Please click the 'next round' button.")
+                        disableButtons()
+                        guess.disabled = true
+                        pass.disabled = true
+                        nextRound.style.pointerEvents = "auto" 
+                        }
+                    // subtract points based on user
+                    else if (switchVariable ==1){
                         playerOneScore1 -= Number(clickedButton[0].textContent)
                         playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
                         }
@@ -180,6 +189,7 @@ function checkAnswer(question){
                         playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`}
                     trys = 0
                     modal.style.display = "none";
+                    // return back to original player if both guessed incorrectly 
                     alert ("Wrong. Other player must now choose a new question")
                     switchVariable *= -1
                     switch(switchVariable){
@@ -194,7 +204,7 @@ function checkAnswer(question){
                     guess.disabled = true
                     pass.disabled = true
                 }
-                
+                // if first answer was wrong
                 else {
                     alert(`Wrong. Other Player's turn. ${question.question}`)
                     guess.disabled = false
@@ -220,23 +230,31 @@ function checkAnswer(question){
             }
         }
     }
-            
-            userInput.value = ""
+    userInput.value = ""
 }
+            
+            // reset input value
+           
+
+    
+// question buttons clicked --> disable  buttons, change clicked button background color   
 buttons.forEach(button => {
     button.addEventListener("click", disableButtons)
     button.addEventListener("click", () => {
         button.style.backgroundColor = "black"
+
         clickedButton = Array.from(buttons).filter(btn => btn == button)
         chooseQuestion(clickedButton)
     })
 })
 
+// use query parameters to pass the players' score and the switchvariable
 nextRound.addEventListener("click", event =>{
 
-    window.location.replace(`final-jeopardy.html?switchVariable=${switchVariable}&playerOneScore1=${playerOneScore1}&playerTwoScore2=${playerTwoScore2}`)})
+    window.location.replace(`round-2.html?switchVariable=${switchVariable}&playerOneScore1=${playerOneScore1}&playerTwoScore2=${playerTwoScore2}`)})
 
 
+// pass button clicked disables the button and changes user's turn
 pass.addEventListener("click", event => {
     event.preventDefault()
     passedClicked = true
@@ -253,7 +271,9 @@ pass.addEventListener("click", event => {
     
 })
 
+// checkAnswer function called when guess is clicked
 guess.addEventListener("click", event =>{
+    console.log(updatedQuestions)
     event.preventDefault()
     checkAnswer(qObject)
     })

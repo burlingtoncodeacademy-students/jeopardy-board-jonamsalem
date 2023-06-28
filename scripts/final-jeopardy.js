@@ -1,4 +1,4 @@
-import placeholderQuestions from "./scripts/placeholder-questions.js";
+import placeholderQuestions from "./placeholder-questions.js";
 
 
 // access final question and set up variables from query parameters

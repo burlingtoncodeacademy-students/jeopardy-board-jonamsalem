@@ -9,7 +9,7 @@ let switchVariable = 1
 let qObject
 let trys = 0
 let question
-
+let clickAmount
 // acquire html components for later use
 let guess = document.querySelector("#guess")
 let pass = document.querySelector("#pass")
@@ -24,7 +24,7 @@ let modalContent = document.querySelector(".modal-content")
 
 // first- round start features
 playerTurn.textContent = "Player 1 Turn"
-let passedClicked = false
+let passedClicked = 0
 pass.disabled = true
 guess.disabled = true
 
@@ -117,8 +117,11 @@ function enableButtons (event){
 
 // check answers
 function checkAnswer(question){
+  
+
         // answer was correct and hide modal display
         if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
+            clickAmount = 0
             modal.style.display = "none";
             // reset trys if this is second time question was answered
             trys = 0
@@ -130,6 +133,7 @@ function checkAnswer(question){
 
              // add points based on whose turn it is 
             if (switchVariable == 1){
+        
             playerOneScore1 += Number(clickedButton[0].textContent)
             playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
             }
@@ -139,7 +143,7 @@ function checkAnswer(question){
             }
 
             // move to next round if reached 15000 points or round1 board all used (31 because needs 30 but function runs before array is updated)
-            if (playerOneScore1 >= 15000 || playerTwoScore2 >= 15000|| updatedQuestions.length  == 31){
+            if (playerOneScore1 >= 15000 || playerTwoScore2 >= 15000|| updatedQuestions.length  == 59){
                 alert("You must now move on to round 2. Please click the 'next round' button.")
                 disableButtons()
                 guess.disabled = true
@@ -149,7 +153,7 @@ function checkAnswer(question){
         }
         // answer incorrectly 
         else if (userInput.value.toLowerCase().trim() != question.answer.toLowerCase()){
-       
+                clickAmount = 0
                 // If pass was clicked and answer was wrong
                 if (passedClicked == true){
                     modal.style.display = "none";
@@ -256,9 +260,21 @@ nextRound.addEventListener("click", event =>{
 
 // pass button clicked disables the button and changes user's turn
 pass.addEventListener("click", event => {
+    console.log(clickAmount)
     event.preventDefault()
     passedClicked = true
-    pass.disabled = true
+    clickAmount += 1
+    if (clickAmount == 2){ 
+        modal.style.display = "none";
+        alert("Other player chooses question")
+        passedClicked = false
+
+        enableButtons()
+        clickAmount = 0
+    }
+    else if (clickAmount =1){
+        alert (`Other player's turn... ${qObject.question}`)
+    }
     switchVariable = switchVariable * -1
     switch(switchVariable){
         case -1:
@@ -267,8 +283,8 @@ pass.addEventListener("click", event => {
         case 1:
             playerTurn.textContent = "Player 1 Turn"
             break;}
-    alert (`Other player's turn... ${qObject.question}`)
-    
+
+
 })
 
 // checkAnswer function called when guess is clicked

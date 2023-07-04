@@ -25,6 +25,7 @@ let modalContent = document.querySelector(".modal-content")
 let passedClicked = false
 pass.disabled = true
 guess.disabled = true
+let clickAmount 
 
 // nextRound disabled
 nextRound.style.pointerEvents= "none"
@@ -249,21 +250,34 @@ nextRound.addEventListener("click", event =>{
     window.location.replace(`final-jeopardy.html?switchVariable=${switchVariable}&playerOneScore1=${playerOneScore1}&playerTwoScore2=${playerTwoScore2}`)})
 
 
-pass.addEventListener("click", event => {
-    event.preventDefault()
-    passedClicked = true
-    pass.disabled = true
-    switchVariable = switchVariable * -1
-    switch(switchVariable){
-        case -1:
-            playerTurn.textContent = "Player 2 Turn"
-            break;
-        case 1:
-            playerTurn.textContent = "Player 1 Turn"
-            break;}
-    alert (`Other player's turn... ${qObject.question}`)
+    pass.addEventListener("click", event => {
+        console.log(clickAmount)
+        event.preventDefault()
+        passedClicked = true
+        clickAmount += 1
+        if (clickAmount == 2){ 
+            modal.style.display = "none";
+            alert("Other player chooses question")
+            passedClicked = false
     
-})
+            enableButtons()
+            clickAmount = 0
+        }
+        else if (clickAmount =1){
+            alert (`Other player's turn... ${qObject.question}`)
+        }
+        switchVariable = switchVariable * -1
+        switch(switchVariable){
+            case -1:
+                playerTurn.textContent = "Player 2 Turn"
+                break;
+            case 1:
+                playerTurn.textContent = "Player 1 Turn"
+                break;}
+    
+    
+    })
+    
 
 guess.addEventListener("click", event =>{
     event.preventDefault()

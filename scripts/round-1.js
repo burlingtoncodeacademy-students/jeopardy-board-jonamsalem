@@ -143,7 +143,7 @@ function checkAnswer(question){
             }
 
             // move to next round if reached 15000 points or round1 board all used (31 because needs 30 but function runs before array is updated)
-            if (playerOneScore1 >= 15000 || playerTwoScore2 >= 15000|| updatedQuestions.length  == 59){
+            if (playerOneScore1 >= 15000 || playerTwoScore2 >= 15000|| updatedQuestions.length  == 31){
                 alert("You must now move on to round 2. Please click the 'next round' button.")
                 disableButtons()
                 guess.disabled = true

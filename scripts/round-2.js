@@ -124,8 +124,11 @@ function enableButtons (event){
 
     }
 
-function checkAnswer(question){
+    function checkAnswer(question){
+  
+
         if (userInput.value.toLowerCase().trim() == question.answer.toLowerCase().trim()){
+            clickAmount = 0
             modal.style.display = "none";
             trys = 0
             guess.disabled = true
@@ -133,8 +136,9 @@ function checkAnswer(question){
             passedClicked = false
             alert("Nice, you get another question")
             enableButtons()
-            
+
             if (switchVariable == 1){
+        
             playerOneScore1 += Number(clickedButton[0].textContent)
             playerOne.textContent = `Player 1 Score : ${playerOneScore1}`
             }
@@ -143,18 +147,16 @@ function checkAnswer(question){
                 playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
             }
 
-            if (playerOneScore1 >= 30000|| playerTwoScore2 >= 30000 || updatedQuestions.length == 31){
+            if (playerOneScore1 >= 30000 || playerTwoScore2 >= 30000|| updatedQuestions.length  == 31){
                 alert("You must now move on to round 2. Please click the 'next round' button.")
                 disableButtons()
                 guess.disabled = true
                 pass.disabled = true
-                nextRound.style.pointerEvents = "auto"
-                
-                
+                nextRound.style.pointerEvents = "auto" 
                 }
         }
         else if (userInput.value.toLowerCase().trim() != question.answer.toLowerCase()){
-
+                clickAmount = 0
                 if (passedClicked == true){
                     modal.style.display = "none";
                     alert("Wrong. Choose another question")
@@ -171,7 +173,6 @@ function checkAnswer(question){
                         playerTwo.textContent = `Player 2 Score : ${playerTwoScore2}`
                      }
                 }
-
                 else if (trys == 1){
                     if (updatedQuestions.length == 31){
                         alert("Wrong. You must now move on to round 2. Please click the 'next round' button.")
@@ -203,7 +204,6 @@ function checkAnswer(question){
                     guess.disabled = true
                     pass.disabled = true
                 }
-                
                 else {
                     alert(`Wrong. Other Player's turn. ${question.question}`)
                     guess.disabled = false
@@ -229,57 +229,65 @@ function checkAnswer(question){
             }
         }
     }
-            
-            userInput.value = ""
+    userInput.value = ""
 }
-// question buttons clicked --> disable  buttons, and remove chosen button,     
+            
+           
 
+    
 buttons.forEach(button => {
     button.addEventListener("click", disableButtons)
     button.addEventListener("click", () => {
         button.style.backgroundColor = "black"
-        
+
         clickedButton = Array.from(buttons).filter(btn => btn == button)
         chooseQuestion(clickedButton)
     })
 })
-
 
 nextRound.addEventListener("click", event =>{
 
     window.location.replace(`final-jeopardy.html?switchVariable=${switchVariable}&playerOneScore1=${playerOneScore1}&playerTwoScore2=${playerTwoScore2}`)})
 
 
-    pass.addEventListener("click", event => {
-        console.log(clickAmount)
-        event.preventDefault()
-        passedClicked = true
-        clickAmount += 1
-        if (clickAmount == 2){ 
-            modal.style.display = "none";
-            alert("Other player chooses question")
-            passedClicked = false
-    
-            enableButtons()
-            clickAmount = 0
-        }
-        else if (clickAmount =1){
-            alert (`Other player's turn... ${qObject.question}`)
-        }
-        switchVariable = switchVariable * -1
-        switch(switchVariable){
-            case -1:
-                playerTurn.textContent = "Player 2 Turn"
-                break;
-            case 1:
-                playerTurn.textContent = "Player 1 Turn"
-                break;}
-    
-    
-    })
-    
+pass.addEventListener("click", event => {
+    console.log(clickAmount)
+    event.preventDefault()
+    passedClicked = true
+    clickAmount += 1
+    if (clickAmount == 2){ 
+        if (updatedQuestions.length == 31){
+            alert("Wrong. You must now move on to round 2. Please click the 'next round' button.")
+            disableButtons()
+            guess.disabled = true
+            pass.disabled = true
+            nextRound.style.pointerEvents = "auto" 
+            }
+        
+        modal.style.display = "none";
+        alert("Other player chooses question")
+        passedClicked = false
+
+        enableButtons()
+        clickAmount = 0
+    }
+    else if (clickAmount =1){
+        alert (`Other player's turn... ${qObject.question}`)
+    }
+    switchVariable = switchVariable * -1
+    switch(switchVariable){
+        case -1:
+            playerTurn.textContent = "Player 2 Turn"
+            break;
+        case 1:
+            playerTurn.textContent = "Player 1 Turn"
+            break;}
+
+
+})
 
 guess.addEventListener("click", event =>{
+    console.log(updatedQuestions)
     event.preventDefault()
     checkAnswer(qObject)
     })

@@ -234,10 +234,10 @@ function checkAnswer(question){
             }
         }
     }
+    // reset input value
     userInput.value = ""
 }
             
-            // reset input value
            
 
     
@@ -264,7 +264,17 @@ pass.addEventListener("click", event => {
     event.preventDefault()
     passedClicked = true
     clickAmount += 1
+    // checks if pass button was clicked twice and returns to original player
     if (clickAmount == 2){ 
+        // move to next round if all questions used
+        if (updatedQuestions.length == 31){
+            alert("Wrong. You must now move on to round 2. Please click the 'next round' button.")
+            disableButtons()
+            guess.disabled = true
+            pass.disabled = true
+            nextRound.style.pointerEvents = "auto" 
+            }
+        
         modal.style.display = "none";
         alert("Other player chooses question")
         passedClicked = false
